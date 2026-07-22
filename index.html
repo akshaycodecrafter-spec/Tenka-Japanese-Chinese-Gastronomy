@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天華 Tenka — Japanese & Chinese Gastronomy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍜</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #0b0b12;
+  --bg-secondary: #12121e;
+  --bg-tertiary: #1a1a28;
+  --bg-card: #1c1c2e;
+  --bg-hover: #282840;
+
+  --text-primary: #f0ebe0;
+  --text-secondary: #a09888;
+  --text-muted: #7a7060;
+  --text-dim: #5a5045;
+
+  --red: #DC2F3B;
+  --red-glow: rgba(220, 47, 59, 0.3);
+
+  --gold: #D4A23A;
+  --gold-light: #E8C44A;
+  --gold-dark: #B88828;
+  --gold-glow: rgba(212, 162, 58, 0.35);
+
+  --jade: #2DA87A;
+  --jade-glow: rgba(45, 168, 122, 0.25);
+
+  --amber: #D0803A;
+  --border: rgba(240, 236, 228, 0.1);
+  --border2: rgba(240, 236, 228, 0.06);
+}
+
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+body:not(.touch) { cursor: none; }
+
+/* ─── CURSOR ─── */
+.touch .cursor, .touch .cursor-ring { display: none; }
+.touch a, .touch button, .touch .product-card, .touch .feature-cell, .touch .review-card, .touch .contact-info-item, .touch input, .touch textarea, .touch .footer-social, .touch .footer-col-links a { cursor: auto; }
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width 0.25s, height 0.25s, background 0.25s, opacity 0.25s;
+  box-shadow: 0 0 12px var(--red-glow);
+}
+.cursor-ring {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(220, 47, 59, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width 0.35s cubic-bezier(0.34,1.56,0.64,1), height 0.35s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s;
+}
+.cursor.hover { width: 4px; height: 4px; background: var(--gold); box-shadow: 0 0 20px var(--gold-glow); }
+.cursor-ring.hover { width: 56px; height: 56px; border-color: rgba(212, 162, 58, 0.5); }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+html { scrollbar-width: thin; scrollbar-color: var(--gold) var(--bg-primary); }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 28px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: padding 0.5s, background 0.5s, border-color 0.5s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  padding: 16px 64px;
+  background: rgba(11, 11, 18, 0.92);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-color: var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-logo .kanji {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0;
+  color: var(--gold);
+  font-weight: 400;
+}
+.nav-links {
+  display: flex;
+  gap: 48px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--bg-primary);
+  background: var(--red);
+  padding: 10px 28px;
+  text-decoration: none;
+  cursor: none;
+  transition: all 0.3s;
+  border: 1px solid var(--red);
+}
+.nav-btn:hover {
+  background: transparent;
+  color: var(--red);
+  box-shadow: 0 0 0 0;
+}
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 64px 80px;
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(212, 162, 58, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(220, 47, 59, 0.04) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(11,11,18,0) 0%, rgba(11,11,18,0.3) 40%, rgba(11,11,18,0.85) 80%, rgba(11,11,18,1) 100%),
+    linear-gradient(to right, rgba(11,11,18,0.15), transparent 50%, rgba(11,11,18,0.15));
+  z-index: 0;
+  pointer-events: none;
+}
+#hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 160px;
+  background: linear-gradient(to top, var(--bg-primary) 40%, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -20px;
+  background:
+    url('https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat;
+  z-index: -1;
+  will-change: transform;
+}
+
+.hero-vertical {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: rgba(240, 235, 224, 0.05);
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 0;
+  font-weight: 800;
+}
+
+.hero-ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(140px, 22vw, 320px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: rgba(240, 235, 224, 0.03);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 0;
+}
+
+.hero-line {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-line::before {
+  content: '';
+  position: absolute;
+  left: 33.33%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border2);
+}
+.hero-line::after {
+  content: '';
+  position: absolute;
+  left: 66.66%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border2);
+}
+
+.hero-top {
+  position: absolute;
+  top: 130px;
+  right: 64px;
+  text-align: right;
+  z-index: 2;
+}
+.hero-top-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.hero-top-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.hero-content { position: relative; z-index: 2; }
+
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeIn 1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
+}
+
+h1.hero-heading {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(64px, 9vw, 130px);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  animation: heroFadeIn 1.2s cubic-bezier(0.22,1,0.36,1) 0.35s forwards;
+}
+h1.hero-heading .kanji-line {
+  font-size: clamp(48px, 6vw, 90px);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  -webkit-text-stroke: 0;
+  display: block;
+  margin-bottom: 8px;
+  opacity: 0;
+  text-shadow: 0 0 60px var(--gold-glow);
+  animation: heroFadeIn 0.8s cubic-bezier(0.22,1,0.36,1) 0.5s forwards;
+}
+h1.hero-heading .line2 {
+  -webkit-text-stroke: 1px rgba(240, 235, 224, 0.1);
+  color: transparent;
+  display: block;
+}
+
+@keyframes heroFadeIn {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeIn 1s cubic-bezier(0.22,1,0.36,1) 0.7s forwards;
+}
+.hero-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 380px;
+  font-weight: 300;
+}
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.btn-primary {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bg-primary);
+  background: var(--red);
+  padding: 14px 36px;
+  text-decoration: none;
+  border: 1px solid var(--red);
+  cursor: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s;
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--red);
+  box-shadow: 0 0 0 0;
+}
+.btn-ghost {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: transparent;
+  padding: 14px 36px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s;
+}
+.btn-ghost:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
+.btn-arrow {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+.btn-primary:hover .btn-arrow, .btn-ghost:hover .btn-arrow { transform: translateX(4px); }
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 48px;
+  left: 64px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: heroFadeIn 1s cubic-bezier(0.22,1,0.36,1) 1.2s forwards;
+}
+.scroll-line {
+  width: 50px; height: 1px;
+  background: var(--text-dim);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 100%; height: 100%;
+  background: var(--red);
+  animation: scrollLine 2.5s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+.scroll-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ─── HERO PARTICLE CANVAS ─── */
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── MARQUEE ─── */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  background: linear-gradient(90deg, var(--bg-secondary) 0%, #161625 50%, var(--bg-secondary) 100%);
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+.marquee-item {
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+  border-right: 1px solid var(--border);
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.marquee-item:hover { color: var(--gold); text-shadow: 0 0 20px var(--gold-glow); }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ─── SECTION COMMONS ─── */
+.section-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
+.section-title .kanji-sub {
+  color: var(--text-dim);
+  font-weight: 400;
+  -webkit-text-stroke: 1px rgba(240, 235, 224, 0.06);
+  color: transparent;
+  display: block;
+}
+
+.section-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--red);
+  margin: 40px 0;
+}
+
+/* ─── PRODUCTS (MENU) ─── */
+#products {
+  padding: 140px 64px;
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, #0e0e18 100%);
+}
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 72px;
+}
+.products-header-right {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 300;
+  max-width: 260px;
+  text-align: right;
+  line-height: 1.7;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.product-card {
+  padding: 44px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  transition: background 0.5s;
+  background: var(--bg-card);
+}
+.product-card:last-child { border-right: none; }
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-hover);
+  transform: translateY(100%);
+  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.product-card:hover::before { transform: translateY(0); }
+.product-card > * { position: relative; z-index: 2; }
+
+.product-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(212, 162, 58, 0.3);
+  padding: 4px 12px;
+  margin-bottom: 20px;
+}
+.product-badge::before {
+  content: '';
+  width: 4px; height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.product-img-wrap {
+  width: 100%;
+  height: 240px;
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+  overflow: hidden;
+  position: relative;
+}
+.product-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(220, 47, 59, 0.08), transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+.product-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) saturate(1.2) contrast(1.05);
+  transition: filter 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+.product-card:hover .product-img-wrap img {
+  filter: brightness(1) saturate(1.3) contrast(1.1);
+  transform: scale(1.08);
+}
+
+.product-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+
+.product-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.product-name span { color: var(--red); }
+.product-card:nth-child(2) .product-name span { color: var(--gold); }
+.product-card:nth-child(3) .product-name span { color: var(--jade); }
+.product-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 48px;
+}
+.product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: none;
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+.product-link:hover { color: var(--red); border-color: rgba(220, 47, 59, 0.4); }
+.product-link-arrow { transition: transform 0.3s; }
+.product-link:hover .product-link-arrow { transform: translateX(4px); }
+.product-ghost-num {
+  position: absolute;
+  bottom: -20px; right: 20px;
+  font-family: 'Syne', sans-serif;
+  font-size: 120px;
+  font-weight: 800;
+  color: rgba(240, 235, 224, 0.02);
+  letter-spacing: -5px;
+  pointer-events: none;
+  line-height: 1;
+  transition: color 0.5s;
+}
+.product-card:hover .product-ghost-num { color: rgba(220, 47, 59, 0.04); }
+
+/* ─── ABOUT ─── */
+#about {
+  padding: 140px 64px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  position: relative;
+  background: linear-gradient(180deg, #0e0e1a 0%, var(--bg-secondary) 100%);
+}
+.about-left {
+  padding-right: 80px;
+  border-right: 1px solid var(--border);
+}
+.about-right {
+  padding-left: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.about-main-img {
+  width: 100%;
+  height: 360px;
+  border: 1px solid var(--border);
+  margin-bottom: 48px;
+  overflow: hidden;
+  position: relative;
+}
+.about-main-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(220, 47, 59, 0.06), transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+.about-main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) saturate(1.15) contrast(1.05);
+  transition: filter 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+.about-main-img:hover img {
+  filter: brightness(1) saturate(1.25) contrast(1.08);
+  transform: scale(1.04);
+}
+
+.about-heading { margin-bottom: 32px; }
+.about-heading .thin {
+  font-weight: 400;
+  -webkit-text-stroke: 1px rgba(240, 235, 224, 0.08);
+  color: transparent;
+}
+.about-body {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 48px;
+}
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.about-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 7px 16px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.about-tag:hover { color: var(--red); border-color: rgba(220, 47, 59, 0.4); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border);
+  margin-bottom: 48px;
+  background: var(--bg-card);
+}
+.stat-box {
+  padding: 36px 32px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+  background: var(--bg-card);
+}
+.stat-box:hover { background: var(--bg-hover); }
+.stat-box:nth-child(even) { border-right: none; }
+.stat-box:nth-child(3), .stat-box:nth-child(4) { border-bottom: none; }
+.stat-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: var(--gold);
+  text-shadow: 0 0 40px var(--gold-glow);
+}
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ─── FEATURES ─── */
+#features {
+  padding: 140px 64px;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--bg-tertiary) 0%, #141420 100%);
+}
+.features-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 80px;
+}
+.features-header-right {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-muted);
+  font-weight: 300;
+  padding-bottom: 4px;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.feature-cell {
+  padding: 48px 40px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.35s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.feature-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  z-index: 0;
+  filter: brightness(0.5) saturate(1.2);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.feature-cell:hover .feature-bg {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.feature-cell:hover { background: #1e1e36; }
+.feature-cell:nth-child(3n) { border-right: none; }
+.feature-cell:nth-child(n+4) { border-bottom: none; }
+
+.feature-cell-content { position: relative; z-index: 2; }
+
+.feature-cell-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+  transition: color 0.3s;
+}
+.feature-cell:hover .feature-cell-num { color: var(--red); }
+
+.feature-cell-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+.feature-cell-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  font-weight: 300;
+  transition: color 0.3s;
+}
+.feature-cell:hover .feature-cell-desc { color: var(--text-secondary); }
+
+.feature-cell-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  background: var(--red);
+  width: 0;
+  z-index: 3;
+  transition: width 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.feature-cell:hover .feature-cell-bar { width: 100%; }
+
+/* ─── REVIEWS ─── */
+#reviews {
+  padding: 140px 64px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-primary);
+}
+.reviews-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 72px; }
+.reviews-count { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); background: var(--bg-card); }
+.review-card { padding: 44px 40px; border-right: 1px solid var(--border); transition: all 0.4s; background: var(--bg-card); }
+.review-card:last-child { border-right: none; }
+.review-card:hover { background: var(--bg-hover); }
+.review-rating { display: flex; gap: 4px; margin-bottom: 24px; }
+.review-star {
+  width: 10px; height: 10px;
+  background: var(--red);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.review-text { font-size: 15px; line-height: 1.8; color: var(--text-secondary); font-weight: 300; margin-bottom: 36px; font-style: italic; }
+.review-divider { height: 1px; background: var(--border); margin-bottom: 28px; }
+.review-author { display: flex; align-items: center; gap: 16px; }
+.review-avatar { width: 40px; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
+.review-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 3px; letter-spacing: -0.01em; }
+.review-role { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; }
+
+/* ─── CONTACT ─── */
+#contact {
+  padding: 140px 64px;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, #0e0e1a 100%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.contact-left { padding-right: 80px; border-right: 1px solid var(--border); }
+.contact-heading { margin-bottom: 24px; }
+.contact-sub { font-size: 15px; line-height: 1.8; color: var(--text-muted); font-weight: 300; margin-bottom: 56px; }
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-info-item { display: flex; align-items: center; gap: 20px; padding: 20px 24px; border: 1px solid var(--border); transition: all 0.3s; background: var(--bg-card); }
+.contact-info-item:hover { border-color: rgba(220, 47, 59, 0.3); background: var(--bg-hover); }
+.ci-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; flex: 0 0 80px; }
+.ci-value { font-size: 14px; color: var(--text-secondary); font-weight: 400; }
+.contact-right { padding-left: 80px; }
+.contact-form { display: flex; flex-direction: column; gap: 0; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; }
+.form-field { position: relative; border: 1px solid var(--border); margin-right: -1px; margin-bottom: -1px; transition: border-color 0.3s; background: var(--bg-card); }
+.form-field.full { grid-column: span 2; }
+.form-field label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); position: absolute; top: 18px; left: 24px; transition: all 0.2s; pointer-events: none; }
+.form-field input, .form-field textarea { width: 100%; background: transparent; border: none; outline: none; padding: 36px 24px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-primary); font-weight: 300; resize: none; appearance: none; cursor: none; }
+.form-field textarea { min-height: 120px; }
+.form-field:focus-within { border-color: var(--red); z-index: 1; }
+.form-field:focus-within label { font-size: 8px; top: 12px; color: var(--red); }
+.form-submit {
+  padding: 22px 40px;
+  background: var(--red);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bg-primary);
+  cursor: none;
+  transition: all 0.3s;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0;
+  margin-bottom: -1px;
+  border: 1px solid var(--border);
+}
+.form-submit:hover {
+  background: transparent;
+  color: var(--red);
+}
+.submit-arrow { transition: transform 0.3s; }
+.form-submit:hover .submit-arrow { transform: translateX(8px); }
+
+/* ─── FOOTER ─── */
+footer { padding: 80px 64px 48px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 80px; background: linear-gradient(180deg, var(--bg-tertiary) 0%, #0d0d18 100%); }
+.footer-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.footer-logo .kanji { font-family: 'DM Sans', sans-serif; font-size: 24px; color: var(--gold); font-weight: 400; letter-spacing: 0; }
+.footer-tagline { font-size: 13px; line-height: 1.75; color: var(--text-muted); font-weight: 300; max-width: 240px; margin-bottom: 32px; }
+.footer-socials { display: flex; gap: 8px; }
+.footer-social { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-muted); text-decoration: none; cursor: none; transition: all 0.3s; background: var(--bg-card); }
+.footer-social:hover { border-color: var(--red); color: var(--red); }
+.footer-col-title { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 24px; }
+.footer-col-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-col-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; font-weight: 300; cursor: none; transition: color 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+.footer-col-links a:hover { color: var(--red); }
+.footer-bottom { border-top: 1px solid var(--border); padding: 24px 64px; display: flex; justify-content: space-between; align-items: center; background: #0d0d18; }
+.footer-copy { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--text-dim); text-transform: uppercase; }
+.footer-bottom-right { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--text-dim); text-transform: uppercase; }
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+/* ─── HAMBURGER ─── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+  padding: 4px;
+  z-index: 101;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 11, 18, 0.98);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu a {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--red); }
+.mobile-menu .nav-btn {
+  font-size: 13px;
+  padding: 14px 40px;
+}
+
+@media (hover: none) {
+  .product-card:hover::before { transform: translateY(100%); }
+  .product-card:hover .product-img-wrap img { filter: brightness(0.85) saturate(1.2) contrast(1.05); transform: none; }
+  .feature-cell:hover .feature-bg { opacity: 0; }
+  .feature-cell:hover { background: var(--bg-card); }
+  .feature-cell:hover .feature-cell-bar { width: 0; }
+  .product-card:hover .product-ghost-num { color: rgba(240, 235, 224, 0.02); }
+  .about-main-img:hover img { filter: brightness(0.85) saturate(1.15) contrast(1.05); transform: none; }
+  .marquee-item:hover { color: var(--text-dim); text-shadow: none; }
+  .btn-primary:hover, .btn-ghost:hover, .nav-btn:hover, .form-submit:hover { background: var(--red); color: var(--bg-primary); }
+  .btn-primary:hover .btn-arrow, .btn-ghost:hover .btn-arrow { transform: none; }
+  .footer-social:hover { border-color: var(--border); color: var(--text-muted); }
+  .footer-col-links a:hover, .nav-links a:hover { color: var(--text-muted); }
+}
+
+@media (max-width: 1100px) {
+  nav { padding: 24px 32px; } nav.scrolled { padding: 16px 32px; } #hero { padding: 0 32px 80px; } .hero-top { right: 32px; } .hero-scroll-hint { left: 32px; } .hero-vertical { display: none; } #products { padding: 100px 32px; } .products-grid { grid-template-columns: 1fr; } .product-card { border-right: none; border-bottom: 1px solid var(--border); } .product-card:last-child { border-bottom: none; } #about { padding: 100px 32px; grid-template-columns: 1fr; gap: 60px; } .about-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 60px; } .about-right { padding-left: 0; } #features { padding: 100px 32px; } .features-header { grid-template-columns: 1fr; gap: 20px; } .features-grid { grid-template-columns: 1fr 1fr; } .feature-cell:nth-child(3n) { border-right: 1px solid var(--border); } .feature-cell:nth-child(2n) { border-right: none; } #reviews { padding: 100px 32px; } .reviews-grid { grid-template-columns: 1fr; } .review-card { border-right: none; border-bottom: 1px solid var(--border); } .review-card:last-child { border-bottom: none; } #contact { padding: 100px 32px; grid-template-columns: 1fr; gap: 60px; } .contact-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 60px; } .contact-right { padding-left: 0; } footer { padding: 80px 32px 48px; grid-template-columns: 1fr 1fr; gap: 48px; } .footer-bottom { padding: 20px 32px; } .nav-links { display: none; } .hamburger { display: flex; } .mobile-menu { display: flex; } .marquee-track { animation-duration: 20s; }
+}
+@media (max-width: 640px) {
+  h1.hero-heading { letter-spacing: -0.03em; font-size: clamp(44px, 12vw, 64px); } .hero-btns { flex-direction: column; align-items: flex-start; width: 100%; } .btn-primary, .btn-ghost { width: 100%; justify-content: center; } .products-header { flex-direction: column; align-items: flex-start; gap: 16px; } .products-header-right { text-align: left; max-width: 100%; } .features-grid { grid-template-columns: 1fr; } .feature-cell:nth-child(2n), .feature-cell:nth-child(3n) { border-right: none; } footer { grid-template-columns: 1fr; gap: 40px; } .reviews-intro { flex-direction: column; align-items: flex-start; gap: 12px; } .form-row { grid-template-columns: 1fr; } .form-field.full { grid-column: span 1; } .hero-top { right: 24px; top: 100px; } .hero-scroll-hint { left: 24px; } .marquee-item { padding: 0 24px; font-size: 11px; } .product-card { padding: 32px 24px; } .stat-number { font-size: 40px; } .stat-box { padding: 24px; } .feature-cell { padding: 36px 24px; } .review-card { padding: 32px 24px; } .contact-left { padding-right: 0; } .contact-info-item { flex-direction: column; align-items: flex-start; gap: 8px; } .footer-logo { font-size: 18px; } .section-title .kanji-sub { font-size: 24px; } .hero-desc { font-size: 15px; max-width: 100%; } .hero-bottom { flex-direction: column; align-items: flex-start; } .hero-content { width: 100%; } .marquee-track { animation-duration: 15s; }
+}
+@media (max-width: 400px) {
+  nav { padding: 18px 20px; } nav.scrolled { padding: 12px 20px; } #hero { padding: 0 20px 60px; } .hero-top { right: 20px; top: 85px; } .hero-top-label { font-size: 10px; } .hero-eyebrow { font-size: 10px; } .hero-desc { font-size: 14px; } .btn-primary, .btn-ghost { padding: 14px 24px; font-size: 11px; } .hero-scroll-hint { left: 20px; bottom: 32px; } .hero-scroll-hint .scroll-text { font-size: 9px; } .section-title { font-size: 28px; } .section-eyebrow { font-size: 9px; } #products, #about, #features, #reviews, #contact { padding: 60px 20px; } .products-header { margin-bottom: 40px; } .product-img-wrap { height: 180px; } .product-name { font-size: 20px; } .about-main-img { height: 220px; } footer { padding: 48px 20px 32px; gap: 32px; } .footer-bottom { padding: 16px 20px; flex-direction: column; gap: 8px; text-align: center; } .footer-tagline { max-width: 100%; } .mobile-menu { gap: 28px; } .mobile-menu a { font-size: 20px; } .stats-grid { grid-template-columns: 1fr; } .stat-box { border-right: none; } .stat-box:nth-child(3) { border-bottom: 1px solid var(--border); } .stat-box:nth-child(4) { border-bottom: none; } h1.hero-heading { font-size: clamp(36px, 14vw, 44px); } .hero-heading .kanji-line { font-size: clamp(32px, 10vw, 48px); } .contact-info-item { padding: 16px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="closeMenu()">Menu</a>
+  <a href="#about" onclick="closeMenu()">Philosophy</a>
+  <a href="#features" onclick="closeMenu()">Process</a>
+  <a href="#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="#contact" onclick="closeMenu()">Reservations</a>
+  <a href="#contact" class="nav-btn" onclick="closeMenu()">Book Table →</a>
+</div>
+
+<nav id="nav">
+  <div class="nav-logo"><span class="kanji">天華</span> TENKA</div>
+  <ul class="nav-links">
+    <li><a href="#products">Menu</a></li>
+    <li><a href="#about">Philosophy</a></li>
+    <li><a href="#features">Process</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Reservations</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:20px;">
+    <a href="#contact" class="nav-btn">Book Table <span class="btn-arrow">→</span></a>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <canvas id="particleCanvas"></canvas>
+  <div class="hero-ghost">天華</div>
+  <div class="hero-line"></div>
+  <div class="hero-vertical">Japanese & Chinese Gastronomy</div>
+  <div class="hero-top">
+    <div class="hero-top-label">Est. 2026 · Tokyo</div>
+    <div class="hero-top-tag">Kaiseki · Dim Sum · Omakase</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">天華 · Two Cultures, One Plate</div>
+    <h1 class="hero-heading">
+      <span class="kanji-line">天華</span>
+      Where Japan<br>
+      <span class="line2">Meets China.</span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">Centuries of Japanese precision and Chinese depth united on a single plate. Every ingredient respected, every tradition honored, every flavor elevated.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary">Explore Menu <span class="btn-arrow">→</span></a>
+        <a href="#contact" class="btn-ghost">Reserve <span class="btn-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item">Sushi · Dim Sum</div>
+    <div class="marquee-item">Kaiseki · Peking Duck</div>
+    <div class="marquee-item">Wagyu · Mapo Tofu</div>
+    <div class="marquee-item">Sake · Baijiu</div>
+    <div class="marquee-item">Tempura · Xiaolongbao</div>
+    <div class="marquee-item">Matcha · Oolong</div>
+    <div class="marquee-item">Rare Vintages</div>
+    <div class="marquee-item">Sushi · Dim Sum</div>
+    <div class="marquee-item">Kaiseki · Peking Duck</div>
+    <div class="marquee-item">Wagyu · Mapo Tofu</div>
+    <div class="marquee-item">Sake · Baijiu</div>
+    <div class="marquee-item">Tempura · Xiaolongbao</div>
+    <div class="marquee-item">Matcha · Oolong</div>
+    <div class="marquee-item">Rare Vintages</div>
+  </div>
+</div>
+
+<section id="products">
+  <div class="products-header reveal">
+    <div>
+      <div class="section-eyebrow">The Experience</div>
+      <div class="section-title">Two Traditions<br><span class="kanji-sub">One Perfection</span></div>
+      <div class="section-divider"></div>
+    </div>
+    <p class="products-header-right">Three signature journeys through the finest of Japanese and Chinese culinary arts. Each experience is a dialogue between two ancient cultures.</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card reveal">
+      <div class="product-badge">Japan</div>
+      <div class="product-num">001</div>
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80" alt="Kaiseki">
+      </div>
+      <h3 class="product-name">The <span>Kaiseki</span></h3>
+      <p class="product-desc">A multi-course pilgrimage through Japan's micro-seasons. Each dish tells a story of time and place, prepared with generations-honed precision.</p>
+      <a href="#" class="product-link">View Menu <span class="product-link-arrow">→</span></a>
+      <div class="product-ghost-num">01</div>
+    </div>
+    <div class="product-card reveal reveal-d1">
+      <div class="product-badge">China</div>
+      <div class="product-num">002</div>
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80" alt="Imperial Chinese Cuisine">
+      </div>
+      <h3 class="product-name">The <span>Imperial</span></h3>
+      <p class="product-desc">An opulent journey through China's imperial kitchens. Peking duck carved tableside, hand-pulled noodles, and dim sum perfected over centuries.</p>
+      <a href="#" class="product-link">View Menu <span class="product-link-arrow">→</span></a>
+      <div class="product-ghost-num">02</div>
+    </div>
+    <div class="product-card reveal reveal-d2">
+      <div class="product-badge">Fusion</div>
+      <div class="product-num">003</div>
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80" alt="Omakase Teppanyaki">
+      </div>
+      <h3 class="product-name">The <span>Omakase</span></h3>
+      <p class="product-desc">An intimate counter experience where Japanese itamae and Chinese wok mastery converge. No menus — only the finest seasonal ingredients speak.</p>
+      <a href="#" class="product-link">Enquire <span class="product-link-arrow">→</span></a>
+      <div class="product-ghost-num">03</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-left">
+    <div class="about-label reveal section-eyebrow">Our Philosophy</div>
+    <h2 class="about-heading section-title reveal reveal-d1">East Meets<br><span class="thin">East.</span></h2>
+    <div class="section-divider"></div>
+    <p class="about-body reveal reveal-d2">Tenka was born from a radical idea: that Japanese and Chinese cuisines are not opposites, but reflections. Japan's precision and restraint. China's depth and generosity. Together, they form a complete culinary universe.<br><br>We honor both traditions by understanding their souls. Our chefs have trained in Kyoto and Chengdu, Tokyo and Hong Kong. Every plate is a conversation across centuries.</p>
+    <div class="about-tags reveal reveal-d3">
+      <span class="about-tag">Kaiseki</span>
+      <span class="about-tag">Dim Sum</span>
+      <span class="about-tag">Binchotan</span>
+      <span class="about-tag">Wok Hei</span>
+      <span class="about-tag">Zero Waste</span>
+      <span class="about-tag">Rare Tea</span>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-main-img reveal">
+        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Master Chef">
+    </div>
+    <div class="stats-grid reveal reveal-d1">
+      <div class="stat-box">
+        <div class="stat-number" data-count="3">0</div>
+        <div class="stat-label">Michelin Stars</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" data-count="18">0</div>
+        <div class="stat-label">Course Tasting</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" data-count="250">0</div>
+        <div class="stat-label">Sake & Tea Labels</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" data-count="5">0</div>
+        <div class="stat-label">% Waste</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="features-header">
+    <div>
+      <div class="section-eyebrow reveal">The Art</div>
+      <h2 class="section-title reveal reveal-d1">Crafted Across<br>Two Worlds</h2>
+      <div class="section-divider"></div>
+    </div>
+    <p class="features-header-right reveal reveal-d1">Every technique, every ingredient, every detail is chosen from the finest of both traditions. We build bridges, not walls, between two of the world's greatest cuisines.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-cell reveal">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&q=80" class="feature-bg" alt="Knife Work">
+      <div class="feature-cell-content">
+        <div class="feature-cell-num">01</div>
+        <h3 class="feature-cell-title">Knife & Wok</h3>
+        <p class="feature-cell-desc">Japanese precision cutting meets the explosive energy of wok hei. Two philosophies of fire and blade, united in our open kitchen.</p>
+      </div>
+      <div class="feature-cell-bar"></div>
+    </div>
+    <div class="feature-cell reveal reveal-d1">
+      <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80" class="feature-bg" alt="Fermentation">
+      <div class="feature-cell-content">
+        <div class="feature-cell-num">02</div>
+        <h3 class="feature-cell-title">Fermentation</h3>
+        <p class="feature-cell-desc">Miso and koji from Japan. Douchi and fermented bean curd from China. Our cellar bridges two ancient traditions of umami.</p>
+      </div>
+      <div class="feature-cell-bar"></div>
+    </div>
+    <div class="feature-cell reveal reveal-d2">
+      <img src="https://images.unsplash.com/photo-1615937657715-bc7b4b7962c1?auto=format&fit=crop&w=600&q=80" class="feature-bg" alt="Charcoal Fire">
+      <div class="feature-cell-content">
+        <div class="feature-cell-num">03</div>
+        <h3 class="feature-cell-title">Binchotan & Wok</h3>
+        <p class="feature-cell-desc">Japanese white charcoal at 1,000°C meets the seasoned wok at 500°C. Two heats, two souls, one kitchen.</p>
+      </div>
+      <div class="feature-cell-bar"></div>
+    </div>
+    <div class="feature-cell reveal reveal-d1">
+      <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80" class="feature-bg" alt="Tea Ceremony">
+      <div class="feature-cell-content">
+        <div class="feature-cell-num">04</div>
+        <h3 class="feature-cell-title">Tea & Spirit</h3>
+        <p class="feature-cell-desc">Matcha ceremony meets Chinese gongfu tea service. Rare Japanese sake alongside aged Chinese baijiu and Huangjiu.</p>
+      </div>
+      <div class="feature-cell-bar"></div>
+    </div>
+    <div class="feature-cell reveal reveal-d2">
+      <img src="https://images.unsplash.com/photo-1506224477000-07aa8a76be20?auto=format&fit=crop&w=600&q=80" class="feature-bg" alt="Garden">
+      <div class="feature-cell-content">
+        <div class="feature-cell-num">05</div>
+        <h3 class="feature-cell-title">Seasonal Soul</h3>
+        <p class="feature-cell-desc">Japan's shun and China's shi-ling — both celebrate the fleeting beauty of each season. Our menu changes daily with nature's rhythm.</p>
+      </div>
+      <div class="feature-cell-bar"></div>
+    </div>
+    <div class="feature-cell reveal reveal-d3">
+      <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80" class="feature-bg" alt="Precision">
+      <div class="feature-cell-content">
+        <div class="feature-cell-num">06</div>
+        <h3 class="feature-cell-title">Harmony</h3>
+        <p class="feature-cell-desc">The final plate balances Japanese minimalism with Chinese abundance. Every dish is a meditation on harmony between two worlds.</p>
+      </div>
+      <div class="feature-cell-bar"></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="reviews-intro">
+    <div>
+      <div class="section-eyebrow reveal">The Critics</div>
+      <h2 class="section-title reveal reveal-d1">Worldwide<br>Acclaim</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="reviews-count reveal">World's 50 Best — 2026</div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-rating">
+        <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+      </div>
+      <p class="review-text">"Tenka achieves what no restaurant has before — a genuine dialogue between Japan and China on a single plate. The kaiseki-dumpling course alone is worth the journey to Tokyo."</p>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">GGA</div>
+        <div>
+          <div class="review-name">Global Gourmet Awards</div>
+          <div class="review-role">3 Stars, 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-d1">
+      <div class="review-rating">
+        <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+      </div>
+      <p class="review-text">"The ambition of Tenka is matched only by its execution. The Peking duck aged in miso is revelatory. This is the most exciting restaurant in Asia."</p>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">CW</div>
+        <div>
+          <div class="review-name">Culinary Weekly</div>
+          <div class="review-role">Top Table, 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-d2">
+      <div class="review-rating">
+        <div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div>
+      </div>
+      <p class="review-text">"I've eaten at the finest restaurants from Kyoto to Shanghai. Tenka is the first to truly understand both cultures at their deepest level. Extraordinary."</p>
+      <div class="review-divider"></div>
+      <div class="review-author">
+        <div class="review-avatar">FDJ</div>
+        <div>
+          <div class="review-name">Fine Dine Journal</div>
+          <div class="review-role">Editor's Choice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-left">
+    <div class="section-eyebrow reveal">Reservations</div>
+    <h2 class="contact-heading section-title reveal reveal-d1">Secure Your<br>Table</h2>
+    <div class="section-divider"></div>
+    <p class="contact-sub reveal reveal-d2">Reservations open 30 days in advance at 10:00 AM JST. For private omakase and chef's table experiences, please submit your request below.</p>
+    <div class="contact-info reveal reveal-d3">
+      <div class="contact-info-item">
+        <span class="ci-label">Location</span>
+        <span class="ci-value">Minato City, Tokyo</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="ci-label">Service</span>
+        <span class="ci-value">Dinner Only · Wed – Sun</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="ci-label">Dress</span>
+        <span class="ci-value">Smart · Dark Tones</span>
+      </div>
+    </div>
+  </div>
+  <div class="contact-right reveal reveal-d1">
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" autocomplete="off">
+        </div>
+        <div class="form-field">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" autocomplete="off">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field full">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" autocomplete="off">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="date">Requested Date</label>
+          <input type="text" id="date" autocomplete="off">
+        </div>
+        <div class="form-field">
+          <label for="guests">Guests</label>
+          <input type="number" id="guests" min="1" max="8" autocomplete="off">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field full">
+          <label for="message">Notes / Allergies</label>
+          <textarea id="message"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="form-submit">
+        <span>Request Reservation</span>
+        <span class="submit-arrow">→</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo"><span class="kanji">天華</span> TENKA</div>
+    <p class="footer-tagline">Where Japanese precision meets Chinese depth. Two cultures, one plate, infinite flavor.</p>
+    <div class="footer-socials">
+      <a href="#" class="footer-social" title="Instagram">IG</a>
+      <a href="#" class="footer-social" title="WeChat">微</a>
+      <a href="#" class="footer-social" title="X">𝕏</a>
+    </div>
+  </div>
+  <div>
+    <div class="footer-col-title">Dining</div>
+    <ul class="footer-col-links">
+      <li><a href="#">Kaiseki Menu →</a></li>
+      <li><a href="#">Imperial Menu →</a></li>
+      <li><a href="#">Omakase →</a></li>
+      <li><a href="#">Tea Pairings →</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Tenka</div>
+    <ul class="footer-col-links">
+      <li><a href="#">Our Story →</a></li>
+      <li><a href="#">The Chefs →</a></li>
+      <li><a href="#">Press →</a></li>
+      <li><a href="#">Careers →</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Visit</div>
+    <ul class="footer-col-links">
+      <li><a href="#">Reservations →</a></li>
+      <li><a href="#">Private Dining →</a></li>
+      <li><a href="#">Location →</a></li>
+      <li><a href="#">Contact →</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <div class="footer-copy">© 2026 天華 Tenka Dining. All rights reserved.</div>
+  <div class="footer-bottom-right">Tokyo, JP · 東京</div>
+</div>
+
+<script>
+  // ─── TOUCH DETECTION ───
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    document.body.classList.add('touch');
+  }
+
+  // ─── CURSOR ───
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll('a, button, .product-card, .feature-cell, .review-card, .contact-info-item').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+  });
+
+  // ─── NAV SCROLL ───
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ─── SCROLL REVEAL ───
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  // ─── COUNT UP ───
+  function countUp(el, target, dur = 2000) {
+    let start = 0;
+    const step = target / (dur / 16);
+    const t = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = Math.floor(start);
+      if (start >= target) clearInterval(t);
+    }, 16);
+  }
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.stat-number[data-count]').forEach(el => {
+          countUp(el, parseInt(el.dataset.count));
+        });
+        statsObs.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  const statsSection = document.querySelector('.stats-grid');
+  if (statsSection) statsObs.observe(statsSection);
+
+  // ─── FORM ───
+  document.querySelectorAll('.form-field input, .form-field textarea').forEach(input => {
+    input.addEventListener('focus', () => {});
+    input.addEventListener('blur', () => {});
+  });
+
+  // ─── MOBILE MENU ───
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    hamburger.classList.toggle('active');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+  }
+
+  // ─── PARALLAX ───
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (heroBg) {
+      heroBg.style.transform = 'translateY(' + (scrollY * 0.3) + 'px)';
+    }
+  });
+
+  // ─── PARTICLES ───
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) { /* skip if no canvas */ }
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const particles = [];
+  const isMobile = window.innerWidth < 768;
+  const PARTICLE_COUNT = isMobile ? 10 : 30;
+
+  function resizeCanvas() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H * -1;
+      this.size = Math.random() * 2.5 + 0.5;
+      this.speedY = Math.random() * 0.25 + 0.08;
+      this.speedX = (Math.random() - 0.5) * 0.15;
+      this.opacity = Math.random() * 0.25 + 0.05;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.01;
+      this.type = Math.random() > 0.5 ? 'petal' : 'sparkle';
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      this.rotation += this.rotationSpeed;
+      if (this.type === 'petal') {
+        this.x += Math.sin(this.y * 0.005) * 0.2;
+      }
+      if (this.y > H + 20 || this.x < -20 || this.x > W + 20) {
+        this.reset();
+        this.y = -20;
+      }
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.globalAlpha = this.opacity;
+      if (this.type === 'petal') {
+        ctx.fillStyle = '#DC2F3B';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size * 1.2, this.size * 0.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillStyle = '#D4A23A';
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size * 0.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    const p = new Particle();
+    p.y = Math.random() * H;
+    particles.push(p);
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+</script>
+</body>
+</html>
