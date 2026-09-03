@@ -2,7 +2,7 @@
 
 A landing page concept for a Tokyo fine-dining restaurant where Japanese precision meets Chinese depth.
 
-🔗 **Live:** [REPLACE_WITH_ACTUAL_URL]
+🔗 **Live:** https://tenka-japanese-chinese-gastronomy.akshaycodecrafter.workers.dev/
 
 ## Preview
 
